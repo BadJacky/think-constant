@@ -7,5 +7,5 @@ use EverForge\ThinkConstant\Exceptions\ConstantException;
 
 class {%className%} extends ConstantException
 {
-    protected const HANDLED_EXCEPTION_FQCN = null;
+    protected const HANDLED_CONSTANT_FQCN = null;
 }

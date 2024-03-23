@@ -83,4 +83,3 @@ try {
 ## License
 MIT
 
-[![JetBrains](https://user-images.githubusercontent.com/19132292/114295373-4f532600-9ad6-11eb-9cfc-39198c98848d.png)](https://www.jetbrains.com/?from=EverForgeThinkConstant)
