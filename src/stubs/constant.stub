@@ -8,7 +8,7 @@ use EverForge\ThinkConstant\Constant;
 class {%className%} extends Constant
 {
     /**
-     * @Message(失败)
+     * @Message("失败")
      */
     public const SERVER_ERROR = 500;
 }
