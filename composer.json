@@ -1,0 +1,36 @@
+{
+    "name": "everforge/think-constant",
+    "description": "Support Constant with Exception handle",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "EverForge\\ThinkConstant\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EverForge\\ThinkConstant\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JackyChen",
+            "email": "zhangqi.chen.cn@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "topthink/framework": ">=v6.0.0",
+        "topthink/think-cache": "^2.0.7",
+        "pestphp/pest": "^1.23"
+    },
+    "config": {
+        "allow-plugins": {
+            "topthink/think-installer": true,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "require": {
+    }
+}

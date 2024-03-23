@@ -1,0 +1,11 @@
+<?php
+declare (strict_types = 1);
+
+namespace {%namespace%};
+
+use EverForge\ThinkConstant\Exceptions\ConstantException;
+
+class {%className%} extends ConstantException
+{
+    protected const HANDLED_EXCEPTION_FQCN = null;
+}
