@@ -22,6 +22,6 @@ class Exception extends Make
 
     protected function getNamespace(string $app): string
     {
-        return parent::getNamespace($app) . '\\exception\\constantExceptions';
+        return parent::getNamespace($app) . '\\exception\\Exceptions';
     }
 }
