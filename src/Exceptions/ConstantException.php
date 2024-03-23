@@ -28,16 +28,16 @@ abstract class ConstantException extends Exception
         $reflected_class = new ReflectionClass(static::getHandledConstantFQCN());
         $constants = $reflected_class->getConstants();
 
-        $constantMap = [];
+        $constant_map = [];
         foreach ($constants as $constant_name => $constant_value) {
             $constant = $reflected_class->getReflectionConstant($constant_name);
             $doc = $constant->getDocComment();
-            $parsedAnnotations = self::parseAnnotationsFromDocComment($doc);
-            $message = $parsedAnnotations['message'] ?? 'Unknown error code';
-            $constantMap[$constant_value] = $message;
+            $parsed_annotations = self::parseAnnotationsFromDocComment($doc);
+            $message = $parsed_annotations['message'] ?? 'Unknown error code';
+            $constant_map[$constant_value] = $message;
         }
 
-        return $constantMap;
+        return $constant_map;
     }
 
     public function getErrorMessage(int $code): string
@@ -57,12 +57,12 @@ abstract class ConstantException extends Exception
     {
         $pattern = '/@(\w+)\((\d+|[^\)]+)\)/';
         preg_match_all($pattern, $docComment, $matches, PREG_SET_ORDER);
-        $parsedAnnotations = [];
+        $parsed_annotations = [];
         foreach ($matches as $match) {
-            $parsedAnnotations[Str::snake($match[1])] = $match[2];
+            $parsed_annotations[Str::snake($match[1])] = $match[2];
         }
 
-        return $parsedAnnotations;
+        return $parsed_annotations;
     }
 
     /**
