@@ -3,9 +3,9 @@
 namespace EverForge\ThinkConstant\Tests\Example;
 
 use EverForge\ThinkConstant\Constant;
+
 class TestConstant extends Constant
 {
-
     /**
      * @Message(失败)
      */

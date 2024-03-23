@@ -2,12 +2,11 @@
 
 namespace EverForge\ThinkConstant\Command\Make;
 
-use think\console\Command;
 use think\console\command\Make;
 
 class Exception extends Make
 {
-    protected $type = "Exception";
+    protected $type = 'Exception';
 
     protected function configure()
     {
@@ -18,7 +17,7 @@ class Exception extends Make
 
     protected function getStub(): string
     {
-        return dirname(__DIR__,2) . DIRECTORY_SEPARATOR  . 'stubs' . DIRECTORY_SEPARATOR . 'exception.stub';
+        return \dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR . 'exception.stub';
     }
 
     protected function getNamespace(string $app): string

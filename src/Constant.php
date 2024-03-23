@@ -1,7 +1,7 @@
 <?php
 
 namespace EverForge\ThinkConstant;
-use EverForge\ThinkConstant\Annotations\ConstantMethodAttribute;
+
 abstract class Constant
 {
     /**

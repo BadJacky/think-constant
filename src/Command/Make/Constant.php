@@ -2,12 +2,11 @@
 
 namespace EverForge\ThinkConstant\Command\Make;
 
-use think\console\Command;
 use think\console\command\Make;
 
 class Constant extends Make
 {
-    protected $type = "Constant";
+    protected $type = 'Constant';
 
     protected function configure()
     {
@@ -18,7 +17,7 @@ class Constant extends Make
 
     protected function getStub(): string
     {
-        return dirname(__DIR__,2) . DIRECTORY_SEPARATOR  . 'stubs' . DIRECTORY_SEPARATOR . 'constant.stub';
+        return \dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR . 'constant.stub';
     }
 
     protected function getNamespace(string $app): string

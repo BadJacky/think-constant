@@ -6,7 +6,7 @@ use EverForge\ThinkConstant\Tests\Example\TestException;
 test('exception should with constant', function () {
     $constant = TestException::getHandledConstantFQCN();
     expect($constant)->toBe(TestConstant::class)
-        ->and(constant($constant . '::SERVER_ERROR'))->toBe(500);
+        ->and(\constant($constant . '::SERVER_ERROR'))->toBe(500);
 });
 
 test('annotation reader matched', function () {
@@ -15,27 +15,39 @@ test('annotation reader matched', function () {
     expect($reflected_class)
         ->toBeInstanceOf(ReflectionClass::class);
     $exception = new TestException(TestConstant::SERVER_ERROR);
-    $error = $exception->getError(500);
-    expect($error)->toBeArray()
-        ->toEqual(['message' => '失败', 'code' => 500]);
+
+    expect($exception)
+        ->toBeInstanceOf(\EverForge\ThinkConstant\Exceptions\ConstantException::class)
+        ->and($exception->getErrorMessage(TestConstant::SERVER_ERROR))->toBe('失败');
 });
 
 test('handled Exception', function () {
     try {
         throw new TestException(TestConstant::SERVER_ERROR);
     } catch (TestException $e) {
-        $error = $e->getError(TestConstant::SERVER_ERROR);
     }
-    expect($error)->toBeArray()
-        ->toEqual(['message' => '失败', 'code' => 500]);
+    expect($e)
+        ->toBeInstanceOf(\EverForge\ThinkConstant\Exceptions\ConstantException::class)
+        ->and($e->getMessage())->toBe('失败');
 });
 
 test('not handled Exception with message', function () {
     try {
         throw new TestException(TestConstant::SERVER_ERROR_FAILED_PARSED);
     } catch (TestException $e) {
-        $error = $e->getError($e->getCode());
     }
-    expect($error)->toBeArray()
-        ->toEqual(['code' => 600]);
+    expect($e)
+        ->toBeInstanceOf(\EverForge\ThinkConstant\Exceptions\ConstantException::class)
+        ->and($e->getMessage())->toBe('Unknown error code');
+});
+
+test('cache is useful', function () {
+    try {
+        throw new TestException(TestConstant::SERVER_ERROR_FAILED_PARSED);
+    } catch (TestException $e) {
+    }
+    $cache_data = \app()->get('cache')->get('test_exception');
+    expect($cache_data)->toBeArray()
+        ->and($cache_data[TestConstant::SERVER_ERROR])->toBe('失败')
+        ->and($cache_data[TestConstant::SERVER_ERROR_FAILED_PARSED])->toBe('Unknown error code');
 });
