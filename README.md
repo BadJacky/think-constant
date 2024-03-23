@@ -12,6 +12,9 @@ composer require everforge/think-constant
 
 ## 使用
 首先，创建一个常量类，继承 `EverForge\ThinkConstant\Constant` 类，然后定义常量：
+```bash
+php think make:constant MyConstant
+```
 
 ```php
 <?php
@@ -29,6 +32,9 @@ class MyConstant extends Constant
 }
 ```
 然后，创建一个继承自 `EverForge\ThinkConstant\Exceptions\ConstantException` 的异常类：
+```bash
+php think make:exception MyException
+```
 
 ```php
 <?php
@@ -59,6 +65,22 @@ try {
     echo $e->getMessage(); // 输出 "失败"
 }
 ```
+## 在 thinkphp 中使用
+```php
+
+// 使用全局错误捕获并处理异常
+/**
+* @see https://www.kancloud.cn/manual/thinkphp6_0/1037615
+ */
+ 
+ if ($e insteadof \EverForge\ThinkConstant\Exceptions\ConstantException::class)
+ {
+    [$code,$message] = [$e->getCode(),$e->getMessage()];
+ }
+
+```
 
 ## License
 MIT
+
+[![JetBrains](https://user-images.githubusercontent.com/19132292/114295373-4f532600-9ad6-11eb-9cfc-39198c98848d.png)](https://www.jetbrains.com/?from=EverForgeThinkConstant)
