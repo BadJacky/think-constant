@@ -26,7 +26,7 @@ use EverForge\ThinkConstant\Constant;
 class MyConstant extends Constant
 {
     /**
-     * @Message(失败)
+     * @Message("系统错误")
      */
     public const SERVER_ERROR = 500;
 }
