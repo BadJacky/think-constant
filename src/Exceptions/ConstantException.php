@@ -55,7 +55,7 @@ abstract class ConstantException extends Exception
 
     private static function parseAnnotationsFromDocComment($docComment): array
     {
-        $pattern = '/@(\w+)\((".*"|[^)]+)\)/';
+        $pattern = '/@(\w+)\("([^"]*)"\)/';
         preg_match_all($pattern, $docComment, $matches, PREG_SET_ORDER);
         $parsed_annotations = [];
         foreach ($matches as $match) {
