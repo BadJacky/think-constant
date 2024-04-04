@@ -1,5 +1,6 @@
 <?php
 
+use EverForge\ThinkConstant\Exceptions\ConstantException;
 use EverForge\ThinkConstant\Tests\Example\TestConstant;
 use EverForge\ThinkConstant\Tests\Example\TestException;
 
@@ -17,7 +18,7 @@ test('annotation reader matched', function () {
     $exception = new TestException(TestConstant::SERVER_ERROR);
 
     expect($exception)
-        ->toBeInstanceOf(\EverForge\ThinkConstant\Exceptions\ConstantException::class)
+        ->toBeInstanceOf(ConstantException::class)
         ->and($exception->getErrorMessage(TestConstant::SERVER_ERROR))->toBe('失败');
 });
 
@@ -27,7 +28,7 @@ test('handled Exception', function () {
     } catch (TestException $e) {
     }
     expect($e)
-        ->toBeInstanceOf(\EverForge\ThinkConstant\Exceptions\ConstantException::class)
+        ->toBeInstanceOf(ConstantException::class)
         ->and($e->getMessage())->toBe('失败');
 });
 
@@ -37,7 +38,7 @@ test('not handled Exception with message', function () {
     } catch (TestException $e) {
     }
     expect($e)
-        ->toBeInstanceOf(\EverForge\ThinkConstant\Exceptions\ConstantException::class)
+        ->toBeInstanceOf(ConstantException::class)
         ->and($e->getMessage())->toBe('Unknown error code');
 });
 
