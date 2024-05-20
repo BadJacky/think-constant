@@ -41,14 +41,3 @@ test('not handled Exception with message', function () {
         ->toBeInstanceOf(ConstantException::class)
         ->and($e->getMessage())->toBe('Unknown error code');
 });
-
-test('cache is useful', function () {
-    try {
-        throw new TestException(TestConstant::SERVER_ERROR_FAILED_PARSED);
-    } catch (TestException $e) {
-    }
-    $cache_data = \app()->get('cache')->get('test_exception');
-    expect($cache_data)->toBeArray()
-        ->and($cache_data[TestConstant::SERVER_ERROR])->toBe('失败')
-        ->and($cache_data[TestConstant::SERVER_ERROR_FAILED_PARSED])->toBe('Unknown error code');
-});

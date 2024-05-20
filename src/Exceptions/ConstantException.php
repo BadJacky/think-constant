@@ -2,7 +2,6 @@
 
 namespace EverForge\ThinkConstant\Exceptions;
 
-use Psr\SimpleCache\CacheInterface;
 use ReflectionClass;
 use think\Exception;
 use think\helper\Str;
@@ -42,15 +41,9 @@ abstract class ConstantException extends Exception
 
     public function getErrorMessage(int $code): string
     {
-        $cache = static::getCache();
-        if ($cache->has($cacheKey = static::getCacheKey())) {
-            return $cache->get($cacheKey)[$code] ?? 'Unknown error code';
-        } else {
-            $constantMap = static::getConstantMap();
-            $cache->set($cacheKey, $constantMap);
+        $constantMap = static::getConstantMap();
+        return $constantMap[$code] ?? 'Unknown error code';
 
-            return $constantMap[$code] ?? 'Unknown error code';
-        }
     }
 
     private static function parseAnnotationsFromDocComment($docComment): array
@@ -63,19 +56,5 @@ abstract class ConstantException extends Exception
         }
 
         return $parsed_annotations;
-    }
-
-    /**
-     * @return CacheInterface
-     */
-    protected static function getCache(): CacheInterface
-    {
-        /* @var \think\Cache $cache */
-        return \app()->get('cache');
-    }
-
-    protected static function getCacheKey(): string
-    {
-        return Str::snake(class_basename(static::class));
     }
 }
